@@ -1,1 +1,7 @@
 output/
+node_modules/
+cache/
+__pycache__/
+.DS_Store
+*.xlsx
+~$*.xlsx

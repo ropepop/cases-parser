@@ -1,0 +1,12 @@
+{
+  "name": "cases-parser",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "merge-kriminalprocess": "node scripts/merge-kriminalprocess.mjs"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "exceljs": "^4.4.0"
+  }
+}
