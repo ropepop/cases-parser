@@ -94,3 +94,13 @@ Criminal-only enrichment is populated only for `Kriminālprocess` rows:
 - some citations still do not resolve to exact official text and are emitted as visible placeholders
 - criminal-row summaries fall back to a deterministic summary when the local MLX result is weak
 - law lookup uses the current consolidated text from `likumi.lv`, not historical text at the hearing date
+
+<!-- github-manager-readme:start -->
+## Public Copy Notes
+
+This repository is refreshed by GitHub Manager from a sanitized staging copy.
+Files that look private, generated, or unsafe for public release are left out before each update.
+
+- Risky files removed in the latest sanitation pass: 1
+- Top-level items in this public copy: `cache/`, `data/`, `scripts/`, `.gitignore`, `package-lock.json`, `package.json`, `run-kriminalprocess.sh`
+<!-- github-manager-readme:end -->
