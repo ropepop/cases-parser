@@ -1,106 +1,60 @@
 # cases-parser
 
-`cases-parser` exports hearing data from the Latvian court calendar into a single Excel workbook. It crawls the monthly summary index, follows each non-empty process link, normalizes civil, criminal, and administrative rows into one schema, and enriches criminal rows with cited law text and a short case summary.
+cases-parser exports hearing data from the Latvian court calendar into a single Excel workbook. It crawls the monthly summary index, follows each non-empty process link, normalizes civil, criminal, and administrative rows into one schema, and enriches criminal rows with cited law text and a short case summary.
 
 ## What It Does
 
-- crawls monthly hearing indexes such as `https://tis.ta.gov.lv/court.jm.gov.lv/stat/html/index_202603.html`
-- follows linked cells across:
-  - `Civilprocess`
-  - `Kriminālprocess`
-  - `Administratīvais process`
-  - `Administratīvais pārkāpuma process`
-  - `Administratīvais pārkāpuma process pēc 01.07.2020`
-- decodes court pages as `windows-1257`
-- writes one workbook with normalized shared columns plus process-specific details
-- resolves criminal-law citations against `likumi.lv`
-- generates a short summary for criminal rows using a local MLX helper
+- cases-parser exports hearing data from the Latvian court calendar into a single Excel workbook. It crawls the monthly summary index, follows each non-empty process link, normalizes civil, criminal, and administrative rows into one schema, and enriches criminal rows with cited law text and a short case summary.
+- crawls monthly hearing indexes such as https://tis.ta.gov.lv/court.jm.gov.lv/stat/html/index_202603.html.
+- decodes court pages as windows-1257.
+- writes one workbook with normalized shared columns plus process-specific details.
 
-## Setup
+## Highlights
 
-Install Node dependencies:
+- Repository structure is summarized so visitors can quickly understand what is included.
+- Setup commands are inferred from the sanitized manifests and scripts.
+- Primary detected language signals: Shell, Python.
+- Previous public README content is available in README.previous.md.
+
+## Tech Stack
+
+- Node.js package.
+- Shell.
+- Python.
+
+## Quick Start
+
+1. Install dependencies.
 
 ```bash
 npm install
 ```
 
-Optional: install the local MLX runtime used for criminal-row summaries:
+2. Run `merge-kriminalprocess`.
 
 ```bash
-python3 -m pip install "mlx-lm>=0.30.7"
+npm run merge-kriminalprocess
 ```
 
-## Usage
+## Project Map
 
-Run the parser with a monthly index URL:
+- `cache/`: Public project file or directory included in the sanitized copy.
+- `data/`: Public project file or directory included in the sanitized copy.
+- `scripts/`: Helper scripts for setup, maintenance, or verification.
+- `.gitignore`: Ignore rules for generated and local-only files.
+- `package-lock.json`: NPM lockfile for reproducible installs.
+- `package.json`: Node package manifest and package metadata.
+- `run-kriminalprocess.sh`: Public project file or directory included in the sanitized copy.
 
-```bash
-node scripts/merge-kriminalprocess.mjs <monthly-index-url> [output-path]
-```
+## Testing
 
-Example:
-
-```bash
-node scripts/merge-kriminalprocess.mjs 'https://tis.ta.gov.lv/court.jm.gov.lv/stat/html/index_202603.html'
-```
-
-Default output file:
-
-```text
-court-calendar-<index-name>.xlsx
-```
-
-## Output
-
-The workbook includes:
-
-- `Procesa grupa`
-- `City`
-- `Sēdes datums`
-- `Sēdes laiks`
-- `Sēdes veids`
-- `Procesa veids`
-- `Court`
-- `Pirmā puse / pieteicējs / prasītājs / apsūdzētais`
-- `Otrā puse / atbildētājs`
-- `Lietas būtība / prasījums`
-- `Lietas rakstura kopsavilkums`
-- `Lietas numurs`
-- `Arhīva numurs`
-- `Apsūdzības panti (deciphered)`
-- `Citēto normu teksts`
-- `Instance`
-- `Tiesnesis`
-- `Tiesas sēdes laiks`
-- `Seriousness rank (1-5)`
-- `Source`
-
-Criminal-only enrichment is populated only for `Kriminālprocess` rows:
-
-- `Apsūdzības panti (deciphered)`
-- `Citēto normu teksts`
-- `Lietas rakstura kopsavilkums`
-- `Seriousness rank (1-5)`
-
-## Project Files
-
-- `scripts/merge-kriminalprocess.mjs`: main parser and workbook writer
-- `scripts/mlx_summarize.py`: local summary helper
-- `data/law-sources.json`: law-code registry for citation resolution
-- `run-kriminalprocess.sh`: convenience wrapper for the current month
-
-## Current Limitations
-
-- some citations still do not resolve to exact official text and are emitted as visible placeholders
-- criminal-row summaries fall back to a deterministic summary when the local MLX result is weak
-- law lookup uses the current consolidated text from `likumi.lv`, not historical text at the hearing date
+No test command was inferred from the sanitized project files.
 
 <!-- github-manager-readme:start -->
 ## Public Copy Notes
 
-This repository is refreshed by GitHub Manager from a sanitized staging copy.
-Files that look private, generated, or unsafe for public release are left out before each update.
-
+- This README was generated by GitHub Manager for a sanitized public copy.
+- Files that look private, generated, or unsafe for public release are left out before each update.
 - Risky files removed in the latest sanitation pass: 1
-- Top-level items in this public copy: `cache/`, `data/`, `scripts/`, `.gitignore`, `package-lock.json`, `package.json`, `run-kriminalprocess.sh`
+- The previous sanitized README is preserved in `README.previous.md`.
 <!-- github-manager-readme:end -->
